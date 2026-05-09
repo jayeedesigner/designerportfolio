@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayeedesigner — Jayed R.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root { --green: #b8ff35; --font-head: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif; }
+
+  [data-theme="dark"] {
+    --bg: #0a0a0a; --surface: #1a1a1a; --surface2: #242424; --surface3: #2e2e2e;
+    --border: rgba(255,255,255,0.06); --text: #e8e8e8; --text-inv: #0a0a0a;
+    --muted: #6b6b6b; --muted2: #444; --nav-bg: rgba(10,10,10,0.88);
+    --card-border: rgba(255,255,255,0.05);
+  }
+  [data-theme="light"] {
+    --bg: #f4f4f0; --surface: #ebebE7; --surface2: #dfdfdB; --surface3: #d0d0cc;
+    --border: rgba(0,0,0,0.08); --text: #111; --text-inv: #fff;
+    --muted: #888; --muted2: #bbb; --nav-bg: rgba(244,244,240,0.90);
+    --card-border: rgba(0,0,0,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: 15px; line-height: 1.6; overflow-x: hidden;
+    transition: background .35s, color .35s;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px; gap: 16px;
+    background: var(--nav-bg); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: background .35s, border-color .35s;
+  }
+  .nav-logo { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -.5px; white-space: nowrap; }
+  .nav-logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--muted); font-size: 14px; text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+
+  .theme-toggle {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--surface3); background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 17px; transition: all .2s; flex-shrink: 0;
+  }
+  .theme-toggle:hover { border-color: var(--green); }
+
+  .nav-cta {
+    background: var(--green); color: #0a0a0a;
+    border: none; padding: 10px 22px; border-radius: 100px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: opacity .2s, transform .2s; white-space: nowrap;
+  }
+  .nav-cta:hover { opacity: .85; transform: translateY(-1px); }
+
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+
+  .nav-drawer {
+    display: none; position: fixed; top: 66px; left: 0; right: 0; z-index: 99;
+    background: var(--nav-bg); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border); padding: 20px 24px 28px;
+    flex-direction: column; gap: 20px;
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a { color: var(--text); font-size: 16px; text-decoration: none; font-weight: 500; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 40px 80px; position: relative; overflow: hidden;
+  }
+  .hero-inner { max-width: 920px; }
+  .hero-tag-row { display: flex; align-items: center; gap: 14px; margin-bottom: 36px; }
+  .avatar {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: var(--surface2); border: 2px solid var(--surface3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; overflow: hidden; flex-shrink: 0;
+  }
+  .hero-name-small { font-family: var(--font-head); font-size: 15px; color: var(--muted); font-weight: 500; }
+  .hero-name-small strong { color: var(--text); }
+  .social-dots { display: flex; gap: 8px; margin-top: 6px; }
+  .social-dots a {
+    width: 28px; height: 28px; border-radius: 7px;
+    background: var(--surface2); display: flex; align-items: center;
+    justify-content: center; text-decoration: none; font-size: 11px;
+    font-weight: 700; font-family: var(--font-head); color: var(--muted); transition: all .2s;
+  }
+  .social-dots a:hover { background: var(--green); color: #0a0a0a; }
+a{
+  text-decoration: none;
+}
+/* a:hover {
+   background: var(--green); color: #0a0a0a;
+} */
+  .hero-headline {
+    font-family: var(--font-head); font-size: clamp(38px, 6.5vw, 78px);
+    font-weight: 800; line-height: 1.06; color: var(--text); letter-spacing: -2px; margin-bottom: 24px;
+  }
+  .hero-headline .badge {
+    display: inline-flex; align-items: center;
+    background: var(--green); color: #0a0a0a; border-radius: 100px; padding: 2px 20px;
+    font-size: clamp(26px, 4.2vw, 50px); font-weight: 800; vertical-align: middle;
+    margin: 0 8px; letter-spacing: -1px;
+    animation: badgePop .6s cubic-bezier(.34,1.56,.64,1) both .3s;
+  }
+  @keyframes badgePop { from{transform:scale(.7);opacity:0} to{transform:scale(1);opacity:1} }
+
+  .hero-sub { font-size: 16px; color: var(--muted); max-width: 480px; line-height: 1.75; margin-bottom: 36px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green); color: #0a0a0a; padding: 14px 28px; border-radius: 100px;
+    font-weight: 700; font-size: 14px; text-decoration: none; transition: transform .2s, opacity .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); opacity: .9; }
+  .btn-primary .arrow {
+    width: 22px; height: 22px; background: rgba(0,0,0,.15); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0; z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    pointer-events:none; opacity:.4;
+  }
+  .hero > * { position:relative; z-index:1; }
+  .hero-glow {
+    position:absolute; width:600px; height:600px;
+    background:radial-gradient(circle,rgba(184,255,53,.07) 0%,transparent 70%);
+    top:10%; right:-100px; pointer-events:none;
+    animation:glowPulse 6s ease-in-out infinite alternate;
+  }
+  @keyframes glowPulse { from{opacity:.5;transform:scale(1)} to{opacity:1;transform:scale(1.1)} }
+
+  /* TICKER */
+  .ticker { background:var(--green); color:#0a0a0a; padding:14px 0; overflow:hidden; white-space:nowrap; }
+  .ticker-inner { display:inline-flex; animation:tickerRoll 22s linear infinite; }
+  .ticker-item {
+    display:inline-flex; align-items:center; gap:18px; padding:0 32px;
+    font-family:var(--font-head); font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  }
+  .ticker-dot { width:5px; height:5px; background:#0a0a0a; border-radius:50%; }
+  @keyframes tickerRoll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* STATS BAR */
+  .stats-bar {
+    display:flex; align-items:center; justify-content:space-around;
+    padding:28px 40px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:24px;
+    transition:border-color .35s;
+  }
+  .stat-item { display:flex; align-items:center; gap:12px; font-size:13px; color:var(--muted); }
+  .stat-num { font-family:var(--font-head); font-size:22px; font-weight:800; color:var(--text); }
+  .stat-num span { color:var(--green); }
+  .stat-sep { width:1px; height:36px; background:var(--surface3); }
+
+  /* SECTION */
+  section { padding:100px 40px; }
+  .section-label {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11px; font-weight:600; letter-spacing:2px;
+    text-transform:uppercase; color:var(--muted); margin-bottom:24px;
+  }
+  .section-label::before { content:''; width:20px; height:1px; background:var(--muted); }
+  h2 { font-family:var(--font-head); font-size:clamp(34px,5vw,58px); font-weight:800; color:var(--text); letter-spacing:-2px; line-height:1.1; }
+
+  /* PORTFOLIO */
+  .blend-section { background:var(--bg); }
+  .blend-top { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:60px; flex-wrap:wrap; }
+  .blend-desc { max-width:340px; color:var(--muted); font-size:15px; }
+  .btn-outline {
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--surface3); color:var(--text); padding:12px 24px; border-radius:100px;
+    font-size:13px; font-weight:600; text-decoration:none; transition:all .2s; white-space:nowrap;
+  }
+  .btn-outline:hover { border-color:var(--green); color:var(--green); }
+
+  /* PORTFOLIO */
+  .blend-section { background:var(--bg); }
+  .blend-top { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:60px; flex-wrap:wrap; }
+  .blend-desc { max-width:340px; color:var(--muted); font-size:15px; }
+  .btn-outline {
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--surface3); color:var(--text); padding:12px 24px; border-radius:100px;
+    font-size:13px; font-weight:600; text-decoration:none; transition:all .2s; white-space:nowrap;
+  }
+  .btn-outline:hover { border-color:var(--green); color:var(--green); }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 16px;
+  }
+  .port-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform .3s;
+  }
+  .port-card:hover { transform: translateY(-5px); }
+  .port-card.tall { grid-row: 1 / 3; }   /* spans both rows = tall */
+
+  /* the image fills the whole card */
+  .port-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* fallback placeholder (before real image added) */
+  .port-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px;
+  }
+
+  /* dark gradient overlay at bottom of every card */
+  .port-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px 20px 18px;
+    background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
+    z-index: 3;
+  }
+  .port-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 5px;
+    transition: all .5s ease-in-out;
+  }
+  .port-name { font-family:var(--font-head); font-weight:700; font-size:15px; color:#fff; }
+  .port-name:hover {
+color:#f7fb12;
+transition: all .5s ease-in-out;
+  }
+
+  .client-row { display:flex; align-items:center; gap:40px; flex-wrap:wrap; margin-top:60px; padding-top:40px; border-top:1px solid var(--border); }
+  .client-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; }
+  .client-logos { display:flex; gap:32px; flex-wrap:wrap; }
+  .client-logo { font-family:var(--font-head); font-size:14px; font-weight:700; color:var(--muted2); letter-spacing:-.5px; }
+
+  /* TOOLBOX */
+  .toolbox-section { background:var(--surface); border-radius:32px; margin:0 16px; padding:80px 60px; transition:background .35s; }
+  .toolbox-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+  .toolbox-left h2 { margin-bottom:20px; }
+  .toolbox-left p { color:var(--muted); max-width:340px; line-height:1.75; }
+  .tools-list { display:flex; flex-direction:column; gap:28px; }
+  .tool-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .tool-name { display:flex; align-items:center; gap:12px; font-family:var(--font-head); font-weight:700; font-size:15px; color:var(--text); }
+  .tool-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; }
+  .tool-pct { font-size:13px; color:var(--muted); font-weight:500; }
+  .tool-bar-bg { height:6px; background:var(--border); border-radius:100px; overflow:hidden; }
+  .tool-bar-fill { height:100%; background:var(--green); border-radius:100px; width:0; transition:width 1.4s cubic-bezier(.16,1,.3,1); }
+
+  /* HOW IT WORKS */
+  .how-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; flex-wrap:wrap; gap:24px; }
+  .how-tags { display:flex; gap:10px; flex-wrap:wrap; }
+  .how-tag {
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--surface2); color:var(--muted); padding:8px 16px; border-radius:100px; font-size:13px;
+    cursor:pointer; transition:all .2s;
+  }
+  .how-tag.active, .how-tag:hover { background:var(--green); color:#0a0a0a; font-weight:600; }
+  .how-tag .dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+  .steps { display:flex; flex-direction:column; }
+  .step { display:grid; grid-template-columns:100px 1fr auto; align-items:start; gap:40px; padding:40px 0; border-bottom:1px solid var(--border); transition:opacity .2s; }
+  .step:hover { opacity:.82; }
+  .step-num { font-family:var(--font-head); font-size:13px; font-weight:700; color:var(--muted); letter-spacing:1px; }
+  .step-title { font-family:var(--font-head); font-size:22px; font-weight:700; color:var(--text); margin-bottom:16px; letter-spacing:-.5px; }
+  .step-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .step-list li { display:flex; align-items:center; gap:10px; font-size:14px; color:var(--muted); }
+  .step-list li::before { content:''; width:4px; height:4px; background:var(--green); border-radius:50%; flex-shrink:0; }
+  .step-duration { font-size:12px; color:var(--muted2); white-space:nowrap; margin-top:4px; }
+
+  /* COUNTERS */
+  .counters-section { display:flex; align-items:center; justify-content:center; background:var(--surface); border-radius:32px; margin:0 16px; padding:60px; flex-wrap:wrap; transition:background .35s; }
+  .counter-item { flex:1; min-width:180px; text-align:center; padding:20px; position:relative; }
+  .counter-item+.counter-item::before { content:''; position:absolute; left:0; top:20%; bottom:20%; width:1px; background:var(--border); }
+  .counter-num { font-family:var(--font-head); font-size:clamp(50px,7vw,70px); font-weight:800; color:var(--text); letter-spacing:-3px; line-height:1; }
+  .counter-num sup { font-size:34px; color:var(--green); }
+  .counter-label { font-size:13px; color:var(--muted); margin-top:8px; }
+
+  /* TESTIMONIALS — unified 9-card slider, 3 per page */
+  .testi-section { text-align: center; }
+  .testi-header { margin-bottom: 48px; }
+  .testi-header .section-label { justify-content: center; }
+  .testi-header .section-label::before { display: none; }
+
+  .testi-slider-outer { position: relative; }
+  .testi-slider-viewport { overflow: hidden; }
+  .testi-slider-track {
+    display: flex; gap: 20px;
+    transition: transform .52s cubic-bezier(.16,1,.3,1);
+    will-change: transform;
+    align-items: stretch;
+  }
+  .testi-card {
+    flex-shrink: 0;
+    background: var(--surface); border-radius: 20px; padding: 28px;
+    border: 1px solid var(--card-border); text-align: left;
+    transition: border-color .2s, transform .2s, background .35s;
+    display: flex; flex-direction: column;
+  }
+  .testi-card:hover { border-color: rgba(184,255,53,.3); transform: translateY(-3px); }
+  .testi-stars { color: var(--green); font-size: 13px; margin-bottom: 16px; letter-spacing: 2px; }
+  .testi-text { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 24px; flex: 1; }
+  .testi-author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: var(--surface2); border: 2px solid var(--surface3);
+    overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .testi-name { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--text); }
+  .testi-role { font-size: 12px; color: var(--muted); }
+  .testi-brand { margin-left: auto; font-size: 18px; flex-shrink: 0; }
+  .testi-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin-top: 32px;
+  }
+  .testi-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid var(--surface3); background: var(--surface2);
+    color: var(--text); font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .22s; flex-shrink: 0;
+  }
+  .testi-btn:hover { border-color: var(--green); background: var(--green); color: #0a0a0a; }
+  .testi-btn:disabled { opacity: .28; cursor: default; pointer-events: none; }
+  .testi-dots { display: flex; gap: 8px; align-items: center; }
+  .testi-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--surface3); cursor: pointer;
+    transition: all .25s; border: none; padding: 0;
+  }
+  .testi-dot.active { background: var(--green); width: 24px; border-radius: 4px; }
+
+  /* FAQ — CENTER ALIGNED */
+  .faq-section { text-align:center; }
+  .faq-header { margin-bottom:56px; }
+  .faq-header .section-label { justify-content:center; }
+  .faq-header .section-label::before { display:none; }
+  .faq-list { max-width:760px; display:flex; flex-direction:column; margin:0 auto; text-align:left; }
+  .faq-item { border-bottom:1px solid var(--border); }
+  .faq-q {
+    width:100%; background:none; border:none; color:var(--text);
+    font-family:var(--font-body); font-size:16px; font-weight:500;
+    text-align:left; padding:22px 0; display:flex; align-items:center; justify-content:space-between;
+    cursor:pointer; gap:20px; transition:color .2s;
+  }
+  .faq-q:hover { color:var(--green); }
+  .faq-q .plus {
+    width:28px; height:28px; border-radius:50%; border:1px solid var(--surface3);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; color:var(--muted); transition:all .3s; flex-shrink:0;
+  }
+  .faq-item.open .faq-q .plus { background:var(--green); color:#0a0a0a; transform:rotate(45deg); border-color:var(--green); }
+  .faq-a { font-size:14px; color:var(--muted); line-height:1.75; max-height:0; overflow:hidden; transition:max-height .4s ease, padding .3s; }
+  .faq-item.open .faq-a { max-height:240px; padding-bottom:20px; }
+
+  /* SOCIAL — CENTER ALIGNED */
+  .social-section { text-align:center; }
+  .social-header { margin-bottom:48px; }
+  .social-header .section-label { justify-content:center; }
+  .social-header .section-label::before { display:none; }
+  .social-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; max-width:1200px; margin:0 auto; }
+  .social-card {
+    border:1px solid var(--card-border); border-radius:20px; padding:28px;
+    display:flex; flex-direction:column; gap:10px; transition:all .2s;
+    cursor:pointer; text-decoration:none; text-align:left;
+  }
+  .social-card:hover { border-color:var(--green); background:rgba(184,255,53,.04); transform:translateY(-3px); }
+  .social-card-icon { font-size:24px; line-height:1; font-family:var(--font-head); font-weight:800; }
+  .social-card-name { font-family:var(--font-head); font-weight:700; font-size:16px; color:var(--text); }
+  .social-card-handle { font-size:12px; color:var(--muted); }
+  .social-card-cta { margin-top:auto; display:inline-flex; align-items:center; gap:5px; font-size:13px; color:var(--green); font-weight:600; }
+
+  /* FOOTER CTA */
+  .footer-cta { background:var(--surface); border-radius:32px; margin:0 16px 40px; padding:100px 60px; text-align:center; position:relative; overflow:hidden; transition:background .35s; }
+  .footer-cta-glow { position:absolute; width:500px; height:300px; background:radial-gradient(ellipse,rgba(184,255,53,.1) 0%,transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+  .footer-cta > * { position:relative; z-index:1; }
+  .footer-cta h2 { font-size:clamp(36px,6vw,66px); letter-spacing:-3px; margin-bottom:40px; }
+  .footer-cta h2 em { font-style:italic; color:var(--green); }
+  .footer-contact { display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; }
+  .footer-email { font-family:var(--font-head); font-size:15px; color:var(--muted); text-decoration:none; transition:color .2s; }
+  .footer-email:hover { color:var(--green); }
+
+  /* FOOTER */
+  footer { display:flex; align-items:center; justify-content:space-between; padding:22px 40px; flex-wrap:wrap; gap:14px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); transition:border-color .35s; }
+  footer a { color:var(--muted); text-decoration:none; transition:color .2s; }
+  footer a:hover { color:var(--green); }
+
+  /* FADE */
+  .fade-up { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:1100px) { .social-grid { grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:860px) {
+    nav { padding:14px 20px; }
+    .nav-links { display:none; }
+    .nav-hamburger { display:flex; }
+    section { padding:64px 20px; }
+    .hero { padding:96px 20px 60px; }
+    .stats-bar { padding:20px; }
+    .portfolio-grid { grid-template-columns:1fr 1fr; grid-template-rows:220px 220px 220px; }
+    .port-card.tall { grid-row:span 1; }
+    .toolbox-inner { grid-template-columns:1fr; gap:44px; }
+    .toolbox-section { margin:0 10px; padding:50px 28px; }
+    .step { grid-template-columns:60px 1fr; }
+    .step-duration { display:none; }
+    .testi-card { padding:20px; }
+    .social-grid { grid-template-columns:repeat(3,1fr); max-width:100%; }
+    .counters-section { padding:40px 20px; margin:0 10px; }
+    .footer-cta { padding:60px 28px; margin:0 10px 30px; }
+    footer { padding:20px; flex-direction:column; text-align:center; }
+  }
+  @media(max-width:560px) {
+    .hero-headline { font-size:clamp(30px,9vw,44px); letter-spacing:-.5px; }
+    .hero-headline .badge { font-size:clamp(20px,6vw,30px); padding:2px 14px; margin:0 4px; }
+    .portfolio-grid { grid-template-columns:1fr; grid-template-rows:repeat(5,220px); }
+    .blend-top { flex-direction:column; align-items:flex-start; }
+    .how-header { flex-direction:column; align-items:flex-start; }
+    .social-grid { grid-template-columns:repeat(2,1fr); }
+    .testi-card { padding:16px; }
+    .counters-section { flex-direction:column; }
+    .counter-item+.counter-item::before { display:none; }
+    nav { padding:12px 16px; }
+    .nav-cta { padding:8px 16px; font-size:12px; }
+    .footer-cta h2 { font-size:clamp(26px,8vw,40px); letter-spacing:-1px; }
+    .faq-list { max-width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Jayee<span>designer</span></div>
+  <ul class="nav-links">
+    <li><a href="#blend">Projects</a></li>
+    <li><a href="#">About me</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeBtn" title="Toggle theme">☀️</button>
+    <a href="https://wa.link/dnm4wy" target="_blank" rel="noopener" class="nav-cta">Get in touch →</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#">Projects</a>
+  <a href="#">About me</a>
+  <a href="#contact">Contact</a>
+  <a href="https://wa.link/dnm4wy" target="_blank" rel="noopener">Get in touch →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-tag-row">
+      <div class="avatar">
+        <!--
+          ╔══════════════════════════════════════════════╗
+          ║  PROFILE PHOTO — REPLACE WITH YOUR OWN      ║
+          ║  src="images/jayed-profile.jpg"              ║
+          ║  Recommended: 200×200px, face-cropped        ║
+          ╚══════════════════════════════════════════════╝
+        -->
+        <img src="images/jayed-profile.jpg"
+             data-local="images/jayed-profile.jpg"
+             alt="Jayed R. — Digital Designer"
+             style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;"
+             onerror="this.src='https://ui-avatars.com/api/?name=Jayed+R&size=100&background=b8ff35&color=0a0a0a&bold=true';">
+      </div>
+      <div>
+        <div class="hero-name-small"><strong>Jayed R.</strong></div>
+        <div class="hero-name-small">Dhaka, Bangladesh</div>
+        <div class="social-dots">
+          <a href="https://www.instagram.com/jayeedesigner" target="_blank" rel="noopener" title="Instagram">IG</a>
+          <a href="https://www.linkedin.com/in/gfxjayed" target="_blank" rel="noopener" title="LinkedIn">in</a>
+          <a href="https://www.upwork.com/freelancers/gfxjayed" target="_blank" rel="noopener" title="Upwork">Up</a>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="hero-headline">
+      Hi! I'm<br>
+      a <span class="badge">Digital Designer</span><br>
+      turning your ideas into<br>pixel‑perfect realities!
+    </h1>
+
+    <p class="hero-sub">
+      I specialise in logo design &amp; brand identity — crafting strategic visual identities that build trust, recognition, and lasting impact across every platform and market.
+    </p>
+
+    <div class="hero-btns">
+      <a href="https://wa.link/dnm4wy" target="_blank" rel="noopener" class="btn-primary">
+        Get in touch
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-dot"></span> Logo &amp; Brand Identity</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> +100% Client Retention Rate</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 150 Satisfied Clients</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Graphic Design Excellence</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Pixel-Perfect Precision</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Follow on Instagram</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Logo &amp; Brand Identity</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> +100% Client Retention Rate</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 150 Satisfied Clients</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Graphic Design Excellence</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Pixel-Perfect Precision</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Follow on Instagram</span>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar fade-up">
+  <div class="stat-item">
+    <div>
+      <div class="stat-num">6 <span>yrs</span></div>
+      <div>of experience</div>
+    </div>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item">
+    <div>
+      <div class="stat-num"><span>+100%</span></div>
+      <div>client retention rate</div>
+    </div>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item">
+    <div>
+      <div class="stat-num">150</div>
+      <div>satisfied clients</div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<section id="blend" class="blend-section fade-up">
+  <div class="blend-top">
+    <div>
+      <div class="section-label">02 — portfolio</div>
+      <h2>I blend creativity with<br>technical expertise</h2>
+    </div>
+    <div>
+      <p class="blend-desc">From brand strategy to final asset delivery — I craft visual identities that are distinctive, versatile, and built to endure across every market and medium.</p>
+      <br>
+      <a href="https://www.behance.net/jayeedesigner" target="_blank" rel="noopener" class="btn-outline">View all projects →</a>
+    </div>
+  </div>
+
+  <div class="portfolio-grid">
+
+    <!-- CARD 1 — বড় কার্ড (tall, বাম পাশে) -->
+    <div class="port-card tall">
+      <img src="images/portfolio/nexvault.jpg" alt="Project 1"
+           style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="port-overlay">
+        <div class="port-tag">● NowPost</div>
+
+
+         <a href="https://www.behance.net/gallery/213280629/Full-Logo-Brand-Identity-Design-for-Logistics-Company" target="_blank"> <div class="port-name">
+
+       
+          
+          Logo &amp; Full Brand System
+        
+        </div> </a>
+      </div>
+    </div>
+
+    <!-- CARD 2 — উপরের মাঝের কার্ড -->
+    <div class="port-card" style="grid-column:2;grid-row:1;">
+      <img src="images/portfolio/lumora.jpg" alt="Project 2"
+           style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="port-overlay">
+        <div class="port-tag">● Alpha Apprisal Group</div>
+
+<a href="https://www.behance.net/gallery/215278617/Branding-for-Real-Estate-company?share=1" target="_blank">
+
+        <div class="port-name">Brand Identity &amp; Stationery</div>
+
+</a>
+      </div>
+    </div>
+
+    <!-- CARD 3 — উপরের ডান কার্ড -->
+    <div class="port-card" style="grid-column:3;grid-row:1;">
+      <img src="images/portfolio/verde.jpg" alt="Project 3"
+           style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="port-overlay">
+        <div class="port-tag">● Logo & LogoMarks</div>
+<a href="https://www.behance.net/gallery/232072115/Logofolio-2025-Volume-1?share=1" target="_blank">
+
+
+        <div class="port-name">Wordmark &amp; Visual Identity</div>
+</a>
+
+      </div>
+    </div>
+
+    <!-- CARD 4 — নিচের মাঝের কার্ড -->
+    <div class="port-card" style="grid-column:2;grid-row:2;">
+      <img src="images/portfolio/morve.jpg" alt="Project 4"
+           style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="port-overlay">
+        <div class="port-tag">● Morvé Fashion</div>
+
+<a href="https://www.behance.net/gallery/222889329/Tallow-Oasis-Logo-design-branding" target="_blank">
+
+
+        <div class="port-name">Packaging &amp; Brand Kit</div>
+
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD 5 — নিচের ডান কার্ড -->
+    <div class="port-card" style="grid-column:3;grid-row:2;">
+      <img src="images/portfolio/ironmark.jpg" alt="Project 5"
+           style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="port-overlay">
+        <div class="port-tag">● Fintech Branding</div>
+<a href="https://www.behance.net/gallery/248620451/Logo-Design?share=1" target="_blank">
+
+
+        <div class="port-name">Logo &amp; Brand Guidelines</div>
+</a>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="client-row">
+    <div class="client-label">Trusted by</div>
+    <div class="client-logos">
+      <div class="client-logo">CROSSTOWN SHAMROCK 5K</div>
+      <div class="client-logo">Alpha Apprisal Group</div>
+      <div class="client-logo">So South Tees</div>
+      <div class="client-logo">MyLand Properties</div>
+      <div class="client-logo">AMER MURAl ART</div>
+      <div class="client-logo">Sun7s Lisbon</div>
+      <div class="client-logo">True grit Cleaning Solution</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLBOX -->
+<div class="toolbox-section fade-up">
+  <div class="toolbox-inner">
+    <div class="toolbox-left">
+      <div class="section-label">03 — skills</div>
+      <h2>My creative<br>toolbox</h2>
+      <br>
+      <p>I use industry-leading Adobe tools and the latest AI to produce graphic design and brand identity work that is precise, versatile, and impactful at every scale — from favicon to billboard.</p>
+    </div>
+    <div class="tools-list">
+      <div class="tool-item">
+        <div class="tool-header">
+          <div class="tool-name">
+            <div class="tool-icon" style="background:#001D26;padding:4px;">
+              <!--
+                TOOL LOGO 1 — Adobe Photoshop
+                Official logo. Replace with local copy if needed: src="images/tools/photoshop.svg"
+              -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg"
+                   onerror="this.outerHTML='🖌️';"
+                   alt="Adobe Photoshop" style="width:28px;height:28px;object-fit:contain;display:block;">
+            </div>
+            Adobe Photoshop
+          </div>
+          <div class="tool-pct">96%</div>
+        </div>
+        <div class="tool-bar-bg"><div class="tool-bar-fill" data-pct="96"></div></div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-header">
+          <div class="tool-name">
+            <div class="tool-icon" style="background:#FF7F18;padding:4px;">
+              <!--
+                TOOL LOGO 2 — Adobe Illustrator
+                Replace with local copy if needed: src="images/tools/illustrator.svg"
+              -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg"
+                   onerror="this.outerHTML='✏️';"
+                   alt="Adobe Illustrator" style="width:28px;height:28px;object-fit:contain;display:block;">
+            </div>
+            Adobe Illustrator
+          </div>
+          <div class="tool-pct">98%</div>
+        </div>
+        <div class="tool-bar-bg"><div class="tool-bar-fill" data-pct="98"></div></div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-header">
+          <div class="tool-name">
+            <div class="tool-icon" style="background:#1C0A2E;padding:4px;">
+              <!--
+                TOOL LOGO 3 — Adobe After Effects
+                Replace with local copy if needed: src="images/tools/aftereffects.svg"
+              -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg"
+                   onerror="this.outerHTML='🎬';"
+                   alt="Adobe After Effects" style="width:28px;height:28px;object-fit:contain;display:block;">
+            </div>
+            Adobe After Effects
+          </div>
+          <div class="tool-pct">80%</div>
+        </div>
+        <div class="tool-bar-bg"><div class="tool-bar-fill" data-pct="80"></div></div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-header">
+          <div class="tool-name">
+            <div class="tool-icon" style="background:#1C0A2E;padding:4px;">
+              <!--
+                TOOL LOGO 4 — Adobe Premiere Pro
+                Replace with local copy if needed: src="images/tools/premiere.svg"
+              -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg"
+                   onerror="this.outerHTML='🎥';"
+                   alt="Adobe Premiere Pro" style="width:28px;height:28px;object-fit:contain;display:block;">
+            </div>
+            Adobe Premiere Pro
+          </div>
+          <div class="tool-pct">75%</div>
+        </div>
+        <div class="tool-bar-bg"><div class="tool-bar-fill" data-pct="75"></div></div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-header">
+          <div class="tool-name">
+            <div class="tool-icon" style="background:#1a1a1a;padding:4px;border:1px solid rgba(184,255,53,.25);">
+              <!--
+                TOOL LOGO 5 — Trending AI Tools (generic AI icon)
+                Replace with a specific AI tool logo you use, e.g. src="images/tools/midjourney.png"
+                or src="images/tools/chatgpt.svg" etc.
+              -->
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+                   onerror="this.outerHTML='🤖';"
+                   alt="AI Tools" style="width:28px;height:28px;object-fit:contain;display:block;">
+            </div>
+            Trending AI Tools
+          </div>
+          <div class="tool-pct">88%</div>
+        </div>
+        <div class="tool-bar-bg"><div class="tool-bar-fill" data-pct="88"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section fade-up">
+  <div class="how-header">
+    <div>
+      <div class="section-label">04 — process</div>
+      <h2>How it works</h2>
+    </div>
+    <div class="how-tags">
+      <div class="how-tag active"><span class="dot"></span> Logo Design</div>
+      <div class="how-tag"><span class="dot"></span> Brand Identity</div>
+      <div class="how-tag"><span class="dot"></span> Brand Guidelines</div>
+      <div class="how-tag"><span class="dot"></span> Brand Refresh</div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Discovery — Understanding your brand's soul</div>
+        <ul class="step-list">
+          <li>Deep-dive into your business model, audience, and competitive landscape</li>
+          <li>Brand questionnaire to capture your values, tone, and market positioning</li>
+          <li>Visual direction moodboard and strategic creative brief</li>
+        </ul>
+      </div>
+      <div class="step-duration">Discovery<br><span style="color:var(--muted)">1–2 days</span></div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">Concept — Crafting unique logo directions</div>
+        <ul class="step-list">
+          <li>Hand-sketched concepts exploring multiple distinct design directions</li>
+          <li>Refined vector drafts in Adobe Illustrator — 100% original, no templates</li>
+          <li>Strategic rationale provided for every concept to explain the thinking</li>
+        </ul>
+      </div>
+      <div class="step-duration">Design<br><span style="color:var(--muted)">3–5 days</span></div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Refinement — Perfecting every detail together</div>
+        <ul class="step-list">
+          <li>Collaborative revision rounds until you are genuinely thrilled</li>
+          <li>Color psychology, typography hierarchy, and spacing refinement</li>
+          <li>Real-world mockup previews — signage, business cards, digital screens</li>
+        </ul>
+      </div>
+      <div class="step-duration">Refine<br><span style="color:var(--muted)">2–3 days</span></div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-title">Delivery — Every file you will ever need</div>
+        <ul class="step-list">
+          <li>Full vector package: AI · EPS · SVG · PDF · PNG (all sizes, transparent)</li>
+          <li>Comprehensive brand guidelines for consistent global application</li>
+          <li>Social media kit, stationery suite, and full usage documentation</li>
+        </ul>
+      </div>
+      <div class="step-duration">Deliver<br><span style="color:var(--muted)">1 day</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTERS -->
+<div class="counters-section fade-up">
+  <div class="counter-item">
+    <div class="counter-num"><span id="c1">0</span><sup>+</sup></div>
+    <div class="counter-label">satisfied clients</div>
+  </div>
+  <div class="counter-item">
+    <div class="counter-num"><span id="c2">0</span><sup>+</sup></div>
+    <div class="counter-label">years of experience</div>
+  </div>
+  <div class="counter-item">
+    <div class="counter-num"><span id="c3">0</span><sup>+</sup></div>
+    <div class="counter-label">projects completed</div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS — 9 cards, 3 per page slider -->
+<section class="testi-section fade-up">
+  <div class="testi-header">
+    <div class="section-label">05 — reviews</div>
+    <h2>Don't take my<br>word for it <span style="color:var(--green)">*</span></h2>
+  </div>
+
+  <div class="testi-slider-outer">
+    <div class="testi-slider-viewport" id="testiSlider">
+      <div class="testi-slider-track" id="testiTrack">
+
+        <!-- CARD 1 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Jayed completely transformed our brand. The logo he created for NexVault is strategic, modern, and instantly recognisable. Our clients constantly compliment our visual identity."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 1 — Sarah Chen
+              Replace src with your image path, e.g. src="images/clients/sarah-chen.jpg"
+              Recommended: 80×80px square, cropped to face
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/sarah-chen.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='👩&#x200D;💼';"
+                   alt="Sarah Chen" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Sarah Chen</div>
+              <div class="testi-role">CEO, NexVault Financial</div>
+            </div>
+            <div class="testi-brand">🏦</div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The brand identity Jayed delivered for Lumora exceeded every expectation. His process is clear, his thinking is strategic, and the final result is genuinely world-class work."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 2 — Marcus Reid
+              Replace src with your image path, e.g. src="images/clients/marcus-reid.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/marcus-reid.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='👨&#x200D;💼';"
+                   alt="Marcus Reid" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Marcus Reid</div>
+              <div class="testi-role">Founder, Lumora Properties</div>
+            </div>
+            <div class="testi-brand">🏡</div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Jayed's work on Verde Health was phenomenal. He understood our market, our values, and delivered a logo that works beautifully from business card to billboard. Highly recommend!"</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 3 — Amina Hassan
+              Replace src with your image path, e.g. src="images/clients/amina-hassan.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/amina-hassan.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='👩&#x200D;⚕️';"
+                   alt="Amina Hassan" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Amina Hassan</div>
+              <div class="testi-role">Director, Verde Health</div>
+            </div>
+            <div class="testi-brand">🌿</div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Outstanding work from start to finish. Jayed took the time to truly understand our e-commerce brand before designing anything. The packaging design he delivered is fresh, premium, and on-brand."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 4 — Léa Fontaine
+              Replace src with your image path, e.g. src="images/clients/lea-fontaine.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/lea-fontaine.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='🛍️';"
+                   alt="Léa Fontaine" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Léa Fontaine</div>
+              <div class="testi-role">Creative Lead, Morvé Fashion</div>
+            </div>
+            <div class="testi-brand">✨</div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"We needed a logo that communicated trust and innovation for a SaaS product. Jayed nailed it on the second concept. The final brand system is clean, versatile, and exactly what we envisioned."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 5 — Daniel Osei
+              Replace src with your image path, e.g. src="images/clients/daniel-osei.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/daniel-osei.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='⚙️';"
+                   alt="Daniel Osei" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Daniel Osei</div>
+              <div class="testi-role">CTO, IronMark SaaS</div>
+            </div>
+            <div class="testi-brand">🔧</div>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Jayed designed our healthcare clinic's full brand identity and it looks absolutely world-class. Patients frequently mention how professional and trustworthy our materials look. Incredible value."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 6 — Dr. Priya Nair
+              Replace src with your image path, e.g. src="images/clients/priya-nair.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/priya-nair.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='🏥';"
+                   alt="Dr. Priya Nair" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Dr. Priya Nair</div>
+              <div class="testi-role">Founder, Medline Clinic</div>
+            </div>
+            <div class="testi-brand">💊</div>
+          </div>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Working with Jayed was a seamless experience. He's responsive, highly professional, and the brand guidelines he delivered made it easy for our whole team to stay consistent across all channels."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 7 — Omar Al-Rashid
+              Replace src with your image path, e.g. src="images/clients/omar-alrashid.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/omar-alrashid.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='🌍';"
+                   alt="Omar Al-Rashid" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Omar Al-Rashid</div>
+              <div class="testi-role">Marketing Director, TradeAxis</div>
+            </div>
+            <div class="testi-brand">📊</div>
+          </div>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Jayed gave us exactly what our startup needed — a bold, memorable logo that stands out in a crowded fintech market. His attention to detail and strategic thinking are truly rare in a designer."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 8 — Jessica Tran
+              Replace src with your image path, e.g. src="images/clients/jessica-tran.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/jessica-tran.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='💳';"
+                   alt="Jessica Tran" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Jessica Tran</div>
+              <div class="testi-role">CEO, PayLaunch Inc.</div>
+            </div>
+            <div class="testi-brand">🚀</div>
+          </div>
+        </div>
+
+        <!-- CARD 9 -->
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I've hired many designers over the years, and Jayed is in a league of his own. He doesn't just make things look good — he makes sure the design actually works for your audience and business goals."</p>
+          <div class="testi-author">
+            <!--
+              CLIENT PHOTO 9 — Rami Khalid
+              Replace src with your image path, e.g. src="images/clients/rami-khalid.jpg"
+            -->
+            <div class="testi-avatar">
+              <img src="images/clients/rami-khalid.jpg"
+                   onerror="this.style.display='none';this.parentElement.innerHTML='🏗️';"
+                   alt="Rami Khalid" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            </div>
+            <div>
+              <div class="testi-name">Rami Khalid</div>
+              <div class="testi-role">Founder, BuildRight Group</div>
+            </div>
+            <div class="testi-brand">🏢</div>
+          </div>
+        </div>
+
+      </div><!-- end track -->
+    </div><!-- end viewport -->
+
+    <!-- SLIDER CONTROLS -->
+    <div class="testi-controls">
+      <button class="testi-btn" id="testiPrev" aria-label="Previous">←</button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button class="testi-btn" id="testiNext" aria-label="Next">→</button>
+    </div>
+  </div><!-- end outer -->
+</section>
+
+<!-- FAQ — CENTER ALIGNED -->
+<section class="faq-section fade-up">
+  <div class="faq-header">
+    <div class="section-label">06 — faq</div>
+    <h2>Got Questions?</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <button class="faq-q">What types of logo design do you offer?<span class="plus">+</span></button>
+      <div class="faq-a">I design every style of logo — Wordmark, Lettermark, Monogram, Emblem, Pictorial Mark, Abstract Mark, and Hand-drawn logos. Every concept is 100% original, no templates or stock assets ever. I'll recommend the best style for your brand based on strategy and target market.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What file formats will I receive on delivery?<span class="plus">+</span></button>
+      <div class="faq-a">You receive a full professional package: AI · EPS · SVG · PDF (print-ready) · PNG in all sizes with transparent backgrounds. Your files will be ready for print, digital, embroidery, signage, and packaging — from favicon to billboard.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How many revisions are included?<span class="plus">+</span></button>
+      <div class="faq-a">Revisions continue until the result genuinely exceeds your expectations. My goal is your complete satisfaction — not a fixed number of rounds. The process is structured and collaborative so we reach the perfect outcome efficiently.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Do you work with international clients?<span class="plus">+</span></button>
+      <div class="faq-a">Absolutely. I've worked with clients across North America, Europe, the Middle East, and Southeast Asia — adapting design sensibilities to each market while maintaining universal clarity. Time zones are never a barrier; I maintain clear, responsive communication throughout.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What industries do you specialise in?<span class="plus">+</span></button>
+      <div class="faq-a">I have deep experience in fintech, real estate, healthcare, e-commerce, SaaS, fashion, and many other sectors. This cross-industry expertise means I bring both design craft and strategic brand thinking — the combination that makes a logo actually work, not just look good.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I get started?<span class="plus">+</span></button>
+      <div class="faq-a">Simply email gfxjayed@gmail.com or hit the button below. We'll have a quick discovery chat about your brand, goals, and timeline — no pressure, just a conversation to see if we're a great fit for each other.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL — CENTER ALIGNED -->
+<section class="social-section fade-up">
+  <div class="social-header">
+    <div class="section-label">07 — connect</div>
+    <h2>I'm all over<br>the internet</h2>
+  </div>
+  <div class="social-grid">
+    <a href="https://www.instagram.com/jayeedesigner" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);">IG</div>
+      <div class="social-card-name">Instagram</div>
+      <div class="social-card-handle">@jayeedesigner</div>
+      <div class="social-card-cta">Follow me →</div>
+    </a>
+    <a href="https://www.linkedin.com/in/gfxjayed" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-icon" style="color:var(--text);font-size:18px;font-family:'Syne',sans-serif;font-weight:800;">in</div>
+      <div class="social-card-name">LinkedIn</div>
+      <div class="social-card-handle">Jayed R.</div>
+      <div class="social-card-cta">Connect →</div>
+    </a>
+    <a href="https://www.behance.net/jayeedesigner" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);">Be</div>
+      <div class="social-card-name">Behance</div>
+      <div class="social-card-handle">jayeedesigner</div>
+      <div class="social-card-cta">See portfolio →</div>
+    </a>
+    <a href="https://wa.link/dnm4wy" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);">Wa</div>
+      <div class="social-card-name">WhatsApp</div>
+      <div class="social-card-handle">Message directly</div>
+      <div class="social-card-cta">Chat now →</div>
+    </a>
+    <a href="https://www.upwork.com/freelancers/gfxjayed" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);">Up</div>
+      <div class="social-card-name">Upwork</div>
+      <div class="social-card-handle">gfxjayed</div>
+      <div class="social-card-cta">Hire me →</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta fade-up" id="contact">
+  <div class="footer-cta-glow"></div>
+  <div class="section-label" style="justify-content:center;margin-bottom:32px;">08 — experience • +100% client retention rate • 150 satisfied clients</div>
+  <h2>Let's create something<br><em>extraordinary</em> together.</h2>
+  <br><br>
+  <div class="footer-contact">
+    <a href="mailto:gfxjayed@gmail.com" class="footer-email">gfxjayed@gmail.com</a>
+    <a href="https://wa.link/dnm4wy" target="_blank" rel="noopener" class="btn-primary">Let's get started <span class="arrow">→</span></a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 Jayed R. · Jayeedesigner. All rights reserved.</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+  </div>
+  <div>Made with ❤️ in Dhaka, Bangladesh</div>
+</footer>
+
+<script>
+// THEME
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const saved = (function(){ try{ return localStorage.getItem('jayed-theme'); }catch(e){ return null; } })() || 'dark';
+root.setAttribute('data-theme', saved);
+themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+
+themeBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+  try{ localStorage.setItem('jayed-theme', next); }catch(e){}
+});
+
+// HAMBURGER
+const hamburger = document.getElementById('hamburger');
+const navDrawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => navDrawer.classList.toggle('open'));
+document.addEventListener('click', (e) => {
+  if (!hamburger.contains(e.target) && !navDrawer.contains(e.target)) navDrawer.classList.remove('open');
+});
+
+// FADE UP
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// SKILL BARS
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.querySelectorAll('.tool-bar-fill').forEach(b => { b.style.width = b.dataset.pct + '%'; });
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('.toolbox-section').forEach(el => barObserver.observe(el));
+
+// COUNTERS
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = (ts) => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+    el.textContent = Math.floor(p * target);
+    if (p < 1) requestAnimationFrame(step); else el.textContent = target;
+  };
+  requestAnimationFrame(step);
+}
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(document.getElementById('c1'), 150, 1800);
+      animateCounter(document.getElementById('c2'), 6, 1400);
+      animateCounter(document.getElementById('c3'), 200, 2000);
+      counterObs.disconnect();
+    }
+  });
+}, { threshold: 0.4 });
+counterObs.observe(document.querySelector('.counters-section'));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// HOW-IT-WORKS TABS
+document.querySelectorAll('.how-tag').forEach(tag => {
+  tag.addEventListener('click', () => {
+    document.querySelectorAll('.how-tag').forEach(t => t.classList.remove('active'));
+    tag.classList.add('active');
+  });
+});
+
+// TESTIMONIAL SLIDER — 9 cards, 3 per page
+(function() {
+  const track    = document.getElementById('testiTrack');
+  const viewport = document.getElementById('testiSlider');
+  const prevBtn  = document.getElementById('testiPrev');
+  const nextBtn  = document.getElementById('testiNext');
+  const dotsWrap = document.getElementById('testiDots');
+  if (!track || !viewport) return;
+
+  const GAP   = 20;
+  const TOTAL = 9;
+  let perPage = 3;
+  let current = 0;
+
+  function getPerPage() {
+    if (window.innerWidth <= 560) return 1;
+    if (window.innerWidth <= 860) return 2;
+    return 3;
+  }
+
+  function pages() { return Math.ceil(TOTAL / perPage); }
+
+  function setWidths() {
+    const w = viewport.offsetWidth;
+    const cardW = (w - GAP * (perPage - 1)) / perPage;
+    track.querySelectorAll('.testi-card').forEach(c => {
+      c.style.flex = `0 0 ${cardW}px`;
+    });
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < pages(); i++) {
+      const d = document.createElement('button');
+      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Page ' + (i + 1));
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, pages() - 1));
+    const w = viewport.offsetWidth;
+    const cardW = (w - GAP * (perPage - 1)) / perPage;
+    const offset = current * perPage * (cardW + GAP);
+    track.style.transform = `translateX(-${offset}px)`;
+    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= pages() - 1;
+  }
+
+  function init() {
+    perPage = getPerPage();
+    setWidths();
+    current  = 0;
+    buildDots();
+    goTo(0);
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // Swipe
+  let sx = 0;
+  viewport.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  viewport.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 44) dx < 0 ? goTo(current + 1) : goTo(current - 1);
+  }, { passive: true });
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(init, 120); });
+
+  init();
+})();
+</script>
+</body>
+</html>
